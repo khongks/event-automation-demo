@@ -28,3 +28,24 @@ spec:
     # whether to send the schema with the messages
     key.converter.schemas.enable: false
     value.converter.schemas.enable: false
+
+    # transform
+    transforms: flatten,redact,drop,origin,casts
+
+    transforms.flatten.type: org.apache.kafka.connect.transforms.Flatten$Value
+    transforms.flatten.delimiter: "_"
+   
+    transforms.redact.type: org.apache.kafka.connect.transforms.MaskField$Value
+    transforms.redact.fields: creditcard_number
+    transforms.redact.replacement: XXXXXXXXXXXXXXXX
+
+    transforms.drop.type: org.apache.kafka.connect.transforms.ReplaceField$Value
+    transforms.drop.blacklist: customer_name
+
+    transforms.origin.type: org.apache.kafka.connect.transforms.InsertField$Value
+    transforms.origin.static.field: origin
+    transforms.origin.static.value: mq-connector
+
+    transforms.casts.type: org.apache.kafka.connect.transforms.Cast$Value
+    transforms.casts.spec: order_quantity:int16
+

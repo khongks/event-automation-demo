@@ -3,6 +3,12 @@ kind: DesignerAuthoring
 metadata:
   name: designer
 spec:
+  authentication:
+    integrationKeycloak:
+      enabled: false
+  authorization:
+    integrationKeycloak:
+      enabled: false
   couchdb:
     replicas: 1
     storage:
@@ -10,8 +16,7 @@ spec:
   designerFlowsOperationMode: local
   license:
     accept: {{ license_accept }}
-    license: L-MJTK-WUU8HE
+    license: L-KZVS-2G3FW4
     use: AppConnectEnterpriseProduction
   replicas: 1
-  useCommonServices: false
   version: '12.0'
