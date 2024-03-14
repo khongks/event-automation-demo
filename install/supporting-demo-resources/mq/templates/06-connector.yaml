@@ -28,3 +28,7 @@ spec:
     # whether to send the schema with the messages
     key.converter.schemas.enable: false
     value.converter.schemas.enable: false
+
+    transform: flatten
+    transforms.flatten.type: org.apache.kafka.connect.transforms.Flatten$Value
+    transforms.flatten.delimiter: "_"

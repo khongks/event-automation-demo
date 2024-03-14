@@ -52,7 +52,7 @@
         wait_condition:
           status: true
           type: Ready
-        wait_timeout: 1200
+        wait_timeout: 2400
       vars:
         welcome_url_eventstreams: placeholder
         welcome_url_eventendpointmanagement: placeholder
