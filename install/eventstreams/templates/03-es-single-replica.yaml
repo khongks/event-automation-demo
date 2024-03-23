@@ -1,0 +1,72 @@
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: EventStreams
+metadata:
+  name: my-kafka-cluster
+  annotations:
+    eventstreams.ibm.com/apicurio-registry-version: '>=2.4'
+spec:
+  adminApi: {}
+  adminUI:
+    authentication:
+      - type: scram-sha-512
+    env:
+      - name: WELCOME_URL_EVENT_STREAMS
+        value: {{ welcome_url_eventstreams }}
+      - name: WELCOME_URL_EVENT_ENDPOINT_MANAGEMENT
+        value: {{ welcome_url_eventendpointmanagement }}
+      - name: WELCOME_URL_EVENT_PROCESSING
+        value: {{ welcome_url_eventprocessing }}
+  apicurioRegistry: {}
+  license:
+    accept: {{ license_accept }}
+    license: L-HRZF-DWHH7A
+    use: EventAutomationNonProduction
+  requestIbmServices:
+    iam: false
+    monitoring: false
+  strimziOverrides:
+    entityOperator:
+      topicOperator: {}
+      userOperator: {}
+    kafka:
+      authorization:
+        type: simple
+      config:
+        auto.create.topics.enable: true
+        inter.broker.protocol.version: "3.6"
+        offsets.topic.replication.factor: 1
+        transaction.state.log.min.isr: 1
+        transaction.state.log.replication.factor: 1
+      listeners:
+        - name: authsslsvc
+          authentication:
+            type: scram-sha-512
+          port: 9095
+          tls: true
+          type: internal
+        - name: external
+          authentication:
+            type: scram-sha-512
+          port: 9096
+          tls: true
+          type: route
+      replicas: 1
+      storage:
+{% if eventstreams_storage_class is defined and eventstreams_storage_class | length %}
+        type: persistent-claim
+        size: 50Gi
+        class: {{ eventstreams_storage_class }}
+{% else %}
+        type: ephemeral
+{% endif %}
+    zookeeper:
+      replicas: 1
+      storage:
+{% if eventstreams_storage_class is defined and eventstreams_storage_class | length %}
+        type: persistent-claim
+        size: 3Gi
+        class: {{ eventstreams_storage_class }}
+{% else %}
+        type: ephemeral
+{% endif %}
+  version: latest
