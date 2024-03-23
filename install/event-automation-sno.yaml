@@ -14,7 +14,7 @@
   ansible.builtin.import_playbook: welcome/prepare.yaml
 
 - name: Install Event Streams Single Replica
-  ansible.builtin.import_playbook: eventstreams/install-single-replica.yaml
+  ansible.builtin.import_playbook: eventstreams/install-sno.yaml
 
 - name: Install Event Endpoint Management
   ansible.builtin.import_playbook: eventendpointmanagement/install.yaml

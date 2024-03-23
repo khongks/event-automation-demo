@@ -47,7 +47,7 @@
         validate_certs: false
         state: present
         namespace: "{{ eventautomation_namespace }}"
-        template: "{{ playbook_dir }}/templates/03-es-single-replica.yaml"
+        template: "{{ playbook_dir }}/templates/03-es-sno.yaml"
         wait: true
         wait_condition:
           status: true

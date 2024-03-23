@@ -109,6 +109,20 @@ ansible-playbook \
     install/event-automation.yaml
 ```
 
+To deploy on Single Node OpenShift with LVM as Block storage
+
+```sh
+ansible-playbook \
+    -e license_accept=true \
+    -e ibm_entitlement_key=YOUR-KEY-HERE \
+    -e install_certmgr=true \
+    -e eventstreams_storage_class=lvms-vg1-immed \
+    -e eventendpointmanagement_storage_class=lvms-vg1-immed \
+    -e eventprocessing_storage_class=lvms-vg1-immed \
+    -e eventautomation_namespace=event-automation \
+    install/event-automation-sno.yaml
+```
+
 ### Advanced options
 
 For more options, see [INSTALL-OPTIONS.md](./INSTALL-OPTIONS.md).
