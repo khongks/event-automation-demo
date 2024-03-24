@@ -92,7 +92,7 @@
         validate_certs: false
         state: present
         namespace: "{{ eventautomation_namespace }}"
-        template: "{{ playbook_dir }}/templates/07-kafkaconnect.yaml"
+        template: "{{ playbook_dir }}/templates/07-kafkaconnect-sno.yaml"
         wait: true
         wait_condition:
           status: true

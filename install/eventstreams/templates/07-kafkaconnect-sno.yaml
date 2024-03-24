@@ -9,8 +9,11 @@ spec:
     group.id: kafka-connect
     client.id: kafka-connect-client
     config.storage.topic: connect-configs
+    config.storage.replication.factor: 1
     offset.storage.topic: connect-offsets
+    offset.storage.replication.factor: 1
     status.storage.topic: connect-status
+    status.storage.replication.factor: 1
     config.providers: file
     config.providers.file.class: org.apache.kafka.common.config.provider.DirectoryConfigProvider
   bootstrapServers: 'my-kafka-cluster-kafka-bootstrap.{{ eventautomation_namespace }}.svc:9095'
@@ -19,8 +22,8 @@ spec:
       cpu: 2048m
       memory: 2Gi
     requests:
-      cpu: 2048m
-      memory: 2Gi
+      cpu: 1024m
+      memory: 1Gi
   authentication:
     passwordSecret:
       password: password
