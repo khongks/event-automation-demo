@@ -74,7 +74,7 @@
         validate_certs: false
         state: present
         namespace: "{{ eventautomation_namespace }}"
-        template: "{{ playbook_dir }}/templates/05-kafkaconnect-topics.yaml"
+        template: "{{ playbook_dir }}/templates/05-kafkaconnect-topics-sno.yaml"
 
     - name: Create Kafka Connect credentials
       kubernetes.core.k8s:
